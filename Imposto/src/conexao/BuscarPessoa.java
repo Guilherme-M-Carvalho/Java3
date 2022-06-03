@@ -19,7 +19,7 @@ import conexao.Conexao;
 public class BuscarPessoa {
     private Conexao conexao;
     
-    
+    //tu e gay
     public BuscarPessoa(){
         this.conexao = new Conexao();
     }
