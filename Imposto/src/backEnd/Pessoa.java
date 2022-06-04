@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexao;
-import com.mysql.cj.util.StringUtils;
+package backEnd;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -12,12 +11,15 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import conexao.CriarUsuario;
 import conexao.BuscarPessoa;
+import conexao.BuscarPessoa;
+import conexao.Conexao;
+import conexao.CriarUsuario;
 import java.util.ArrayList;
 /**
  *
  * @author 125111345741
  */
-public class Pessoa {
+public class Pessoa{
     private Conexao conexao;
     private CriarUsuario criarUsuario;
     private BuscarPessoa buscarPessoa;
@@ -26,19 +28,32 @@ public class Pessoa {
     public String email;
     public String senha;
     public String dataCriacao;
+    public String nomeTipo;
     public Integer idTipoUser;
+    public Integer idUsuarioLogado;
+    public Integer idTipoUsuarioLogado;
+    public String nomeTipoLogado;
+    
     public ArrayList<String> nomeLista;
     public ArrayList<String> emailLista;
     public ArrayList<String> senhaLista;
     public ArrayList<String> dataCriacaoLista;
     public ArrayList<Integer> idTipoUserLista;
     public ArrayList<Integer> idLista;
+    public ArrayList<String> nomeTipoLista;
 
     
    
     public Pessoa(){
         this.criarUsuario = new CriarUsuario();
         this.buscarPessoa = new BuscarPessoa();
+        this.idLista = new ArrayList<>();
+        this.idTipoUserLista = new ArrayList<>();
+        this.nomeLista = new ArrayList<>();
+        this.emailLista = new ArrayList<>();
+        this.senhaLista = new ArrayList<>();
+        this.dataCriacaoLista = new ArrayList<>();
+        this.nomeTipoLista = new ArrayList<>();
     }
     
     public void setIdTipoUser(int idTipoUser) {
@@ -48,8 +63,11 @@ public class Pessoa {
     public void setId(int id) {
         this.id = id;
     }
-    
-    
+
+    public void setNomeTipo(String nomeTipo) {
+        this.nomeTipo = nomeTipo;
+    }
+        
     public void setNome(String nome) {
         this.nome = nome;
     }
@@ -66,32 +84,8 @@ public class Pessoa {
         this.dataCriacao = dataCriacao;
     }
     
-    public boolean inserirUsuario(String nome, String email, String senha, Integer idTipo){
-        if(!StringUtils.isNullOrEmpty(nome) && !StringUtils.isNullOrEmpty(email) && !StringUtils.isNullOrEmpty(senha) && !StringUtils.isNullOrEmpty(idTipo.toString())){
-            criarUsuario.inserir(nome, email, senha, idTipo);
-            return true;
-        }
-        return false;
-    }
-    
-    public boolean validarCB(Integer valor){
-        if(valor > 0){
-            return true;
-        } 
-        return false;
-    }
-    
     public void buscarPessoa(){
-        BuscarPessoa p1 = new BuscarPessoa();
-        ArrayList<Pessoa> Pessoas = p1.buscar();
-        idLista = new ArrayList<>();
-        idTipoUserLista = new ArrayList<>();
-        nomeLista = new ArrayList<>();
-        emailLista = new ArrayList<>();
-        senhaLista = new ArrayList<>();
-        dataCriacaoLista = new ArrayList<>();
-        
-        
+        ArrayList<Pessoa> Pessoas = buscarPessoa.buscar();
         for(Pessoa p: Pessoas){
             this.idLista.add(p.id);
             this.idTipoUserLista.add(p.idTipoUser);
@@ -99,21 +93,8 @@ public class Pessoa {
             this.emailLista.add(p.email);
             this.senhaLista.add(p.senha);
             this.dataCriacaoLista.add(p.dataCriacao);
-   
+            this.nomeTipoLista.add(p.nomeTipo);
         }  
-    }
-    
-    public boolean vLogin(String email, String senha){
-        buscarPessoa();
-        if(!StringUtils.isNullOrEmpty(email) && !StringUtils.isNullOrEmpty(senha)){
-            for (int i = 0; i < idLista.size(); i++) {
-                if(emailLista.get(i).equals(email)  && senhaLista.get(i).equals(senha)){
-                    return true;
-                }
-
-            }
-        }
-        return false;
     }
 }
 

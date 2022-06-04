@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import conexao.Conexao;
-import conexao.TipoUsuario;
+import backEnd.TipoUsuario;
 /**
  *
  * @author 125111345741

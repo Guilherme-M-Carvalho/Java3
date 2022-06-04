@@ -3,7 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package conexao;
+package backEnd;
+import conexao.BuscarTipoUser;
 import conexao.BuscarTipoUser;
 import java.util.ArrayList;
 /**

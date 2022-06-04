@@ -7,9 +7,11 @@ package imposto;
 
 import conexao.Conexao;
 import conexao.BuscarPessoa;
-import conexao.TipoUsuario;
+import backEnd.TipoUsuario;
 import java.util.ArrayList;
-import conexao.Pessoa;
+import backEnd.EfetuarLogin;
+import javax.swing.JOptionPane;
+import conexao.CriarProduto;
 /**
  *
  * @author 125111345741
@@ -133,10 +135,13 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLoginActionPerformed
-        Pessoa p1 = new Pessoa();
-        if(p1.vLogin(txt_Email.getText(), txt_Senha.getText())){
-           Menu menu  = new Menu();
+        EfetuarLogin login = new EfetuarLogin();
+        if(login.vLogin(txt_Email.getText(), txt_Senha.getText())){
+           Menu menu  = new Menu(login.idUsuarioLogado, login.idTipoUsuarioLogado, login.nomeTipoLogado);
            menu.show();
+           JOptionPane.showMessageDialog(this, login.menssagem, "Sucesso", 1);
+        } else {
+           JOptionPane.showMessageDialog(this, login.menssagem, "Erro", 1);
         }
     }//GEN-LAST:event_BtnLoginActionPerformed
 
@@ -175,7 +180,8 @@ public class Login extends javax.swing.JFrame {
         }
         //</editor-fold>
 
-        
+        CriarProduto u = new CriarProduto();
+        u.inserir();
         
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

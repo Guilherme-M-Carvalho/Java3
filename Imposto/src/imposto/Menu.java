@@ -4,18 +4,29 @@
  * and open the template in the editor.
  */
 package imposto;
-
+import backEnd.MenuTipoUsuario;
 /**
  *
  * @author 125111345741
  */
 public class Menu extends javax.swing.JFrame {
-
+    public Boolean administradoSimNao;
+    public MenuTipoUsuario menu;
     /**
      * Creates new form Menu
      */
-    public Menu() {
+    public Menu(Integer idUsuarioLogado, Integer IdTipoUsuarioLogado, String nomeTipoLogado) {
         initComponents();
+        this.menu = new MenuTipoUsuario();
+        this.administradoSimNao = menu.validarUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+        modificarTelaUsuarioComum(administradoSimNao);
+    }
+    
+    public void modificarTelaUsuarioComum(Boolean administradoSimNao){
+        if(!administradoSimNao){
+            item_novo.setVisible(false);
+            item_editar.setVisible(false);
+        }
     }
 
     /**
@@ -29,15 +40,18 @@ public class Menu extends javax.swing.JFrame {
 
         jMenu1 = new javax.swing.JMenu();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
+        item_novo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
+        item_editar = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        item_visualizar = new javax.swing.JMenu();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jMenu2.setText("Novo");
+        item_novo.setText("Novo");
 
         jMenuItem1.setText("Adicionar usuário");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
@@ -45,7 +59,7 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem1ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem1);
+        item_novo.add(jMenuItem1);
 
         jMenuItem2.setText("Adicionar produto");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -53,9 +67,24 @@ public class Menu extends javax.swing.JFrame {
                 jMenuItem2ActionPerformed(evt);
             }
         });
-        jMenu2.add(jMenuItem2);
+        item_novo.add(jMenuItem2);
 
-        jMenuBar1.add(jMenu2);
+        jMenuBar1.add(item_novo);
+
+        item_editar.setText("Editar");
+
+        jMenuItem3.setText("Editar usuário");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        item_editar.add(jMenuItem3);
+
+        jMenuBar1.add(item_editar);
+
+        item_visualizar.setText("Visualizar");
+        jMenuBar1.add(item_visualizar);
 
         setJMenuBar(jMenuBar1);
 
@@ -79,49 +108,26 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        AdicionarProduto newProduto = new AdicionarProduto();
+        newProduto.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Menu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new Menu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu item_editar;
+    private javax.swing.JMenu item_novo;
+    private javax.swing.JMenu item_visualizar;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }

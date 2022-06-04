@@ -5,6 +5,7 @@
  */
 package conexao;
 
+import backEnd.Pessoa;
 import java.util.ArrayList;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -27,7 +28,7 @@ public class BuscarPessoa {
     public ArrayList<Pessoa> buscar(){
 
         ArrayList<Pessoa> listaPessoa = new ArrayList<>();
-        String sql = "select * from pessoa";
+        String sql = "select * from vw_pessoa";
         
         try{
             if(this.conexao.conectar()){
@@ -43,6 +44,7 @@ public class BuscarPessoa {
                     pessoa.setSenha(resultado.getString("senha"));
                     pessoa.setDataCriacao(resultado.getString("data_criacao"));
                     pessoa.setIdTipoUser(resultado.getInt("idTipoUsuario"));
+                    pessoa.setNomeTipo(resultado.getString("nome_tipo_usuario"));
                     listaPessoa.add(pessoa);
                 }
                 

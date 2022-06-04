@@ -3,15 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/conexao/BuscarTipoUser.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/imposto/Login.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/imposto/Menu.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/conexao/BuscarPessoa.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/conexao/TipoUsuario.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/imposto/AdicionarUsuario.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/conexao/Conexao.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/imposto/AdicionarProduto.java</file>
-            <file>file:/C:/Users/125111345741/Desktop/java/Imposto/src/conexao/Pessoa.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/conexao/CriarProduto.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/imposto/Login.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/backEnd/AddProduto.java</file>
         </group>
     </open-files>
 </project-private>

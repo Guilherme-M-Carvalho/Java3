@@ -21,7 +21,7 @@ public class Conexao {
     
     public Conexao(){
         this.servidor = "localhost";
-        this.banco = "imposto";
+        this.banco = "sistema";
         this.usuario = "root";
         this.senha = "root";
     }
