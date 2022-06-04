@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package conexao;
+import backEnd.Pessoa;
 import javax.swing.JOptionPane;
 import java.sql.SQLException;
 import java.sql.PreparedStatement;
@@ -13,14 +14,18 @@ import java.sql.ResultSet;
  *
  * @author 125111345741
  */
-public class CriarUsuario {
+public class CriarUsuario extends Pessoa{
     private Conexao conexao;
     
-    public CriarUsuario(){
+    public CriarUsuario(String nome, String email, String senha, Integer idTipo){
         this.conexao = new Conexao();
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.idTipoUsuario = idTipo;
     }
     
-    public void inserir(String nome, String email, String senha, Integer idTipo){
+    public void inserir(){
         String sql = "insert into pessoa (nome, email, senha, idTipoUsuario) values (?,?,?,?)";
         
         try{
@@ -29,7 +34,7 @@ public class CriarUsuario {
                 sentenca.setString(1, nome);
                 sentenca.setString(2, email);
                 sentenca.setString(3, senha);
-                sentenca.setInt(4, idTipo);
+                sentenca.setInt(4, idTipoUsuario);
                 sentenca.execute();
                 sentenca.close();
                 

@@ -13,8 +13,12 @@ public class AddUsuario extends Pessoa{
     private CriarUsuario criarUsuario;
     public String mensagem;
     
-    public AddUsuario(){
-        this.criarUsuario = new CriarUsuario();
+    public AddUsuario(String nome, String email, String senha, Integer idTipo){
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.idTipoUsuario = idTipo;
+        this.criarUsuario = new CriarUsuario(this.nome, this.email, this.senha, this.idTipoUsuario);
     }
     
     public Boolean emailExite(String emailForm){
@@ -34,11 +38,11 @@ public class AddUsuario extends Pessoa{
         return false;
     }
     
-    public boolean inserirUsuario(String nome, String email, String senha, Integer idTipo){
-        if(!nome.isEmpty() && !email.isEmpty() && !senha.isEmpty() && !idTipo.toString().isEmpty()){
-            if(validarCB(idTipo)){
+    public boolean inserirUsuario(){
+        if(!nome.isEmpty() && !email.isEmpty() && !senha.isEmpty() && !idTipoUsuario.toString().isEmpty()){
+            if(validarCB(idTipoUsuario)){
                 if(!emailExite(email)){
-                    criarUsuario.inserir(nome, email, senha, idTipo);
+                    criarUsuario.inserir();
                     this.mensagem = "Usuário "+ nome +" cadastrado com sucesso!";
                     return true;
                 } else {

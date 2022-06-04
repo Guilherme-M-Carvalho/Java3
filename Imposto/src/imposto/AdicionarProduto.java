@@ -11,12 +11,18 @@ import javax.swing.JOptionPane;
  * @author 125111345741
  */
 public class AdicionarProduto extends javax.swing.JFrame {
-
+    public Integer idUsuarioLogado;
+    private Integer cod_barras;
+    private Integer preco;
+    private String descricao;
+    private String nome;
+    private Integer qtd;
     /**
      * Creates new form AdicionarProduto
      */
-    public AdicionarProduto() {
+    public AdicionarProduto(Integer idUsuarioLogado) {
         initComponents();
+        this.idUsuarioLogado = idUsuarioLogado;
     }
 
     /**
@@ -33,10 +39,10 @@ public class AdicionarProduto extends javax.swing.JFrame {
         addProduto = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_descricao = new javax.swing.JTextArea();
-        txt_codBarras = new javax.swing.JFormattedTextField();
-        txt_qtd = new javax.swing.JFormattedTextField();
-        txt_preco1 = new javax.swing.JFormattedTextField();
         txt_nome = new javax.swing.JTextField();
+        txt_cod_barras = new javax.swing.JTextField();
+        txt_preco = new javax.swing.JTextField();
+        txt_qtd = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -53,11 +59,29 @@ public class AdicionarProduto extends javax.swing.JFrame {
         txt_descricao.setRows(5);
         jScrollPane1.setViewportView(txt_descricao);
 
-        txt_codBarras.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_nome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nomeActionPerformed(evt);
+            }
+        });
 
-        txt_qtd.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_cod_barras.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_cod_barrasActionPerformed(evt);
+            }
+        });
 
-        txt_preco1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_preco.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_precoActionPerformed(evt);
+            }
+        });
+
+        txt_qtd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_qtdActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,24 +90,22 @@ public class AdicionarProduto extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(161, 161, 161)
-                                .addComponent(addProduto))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(txt_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, 352, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(161, 161, 161)
+                        .addComponent(addProduto)
+                        .addGap(0, 160, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txt_preco1, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(txt_codBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txt_cod_barras, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(37, 37, 37)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txt_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, 158, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,15 +113,16 @@ public class AdicionarProduto extends javax.swing.JFrame {
                 .addGap(17, 17, 17)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txt_codBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_cod_barras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txt_preco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txt_preco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(7, 7, 7))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txt_nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
                 .addComponent(txt_qtd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(59, 59, 59)
+                .addGap(56, 56, 56)
                 .addComponent(addProduto)
                 .addContainerGap(90, Short.MAX_VALUE))
         );
@@ -125,20 +148,44 @@ public class AdicionarProduto extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addProdutoActionPerformed
-        AddProduto newProduto = new AddProduto();
-        Integer cod_barras = Integer.parseInt(txt_codBarras.getText());
-        String preco = txt_preco1.getText();
-        String descricao = txt_descricao.getText();
-        String nome = txt_nome.getText();
-        Integer qtd = Integer.parseInt(txt_qtd.getText());
-        if(newProduto.inserirProduto(cod_barras, preco, descricao, nome, qtd)){
-            hide();
-            JOptionPane.showMessageDialog(this, newProduto.mensage, "Sucesso", 1);
+        AddProduto produto = new AddProduto();        
+        if(produto.validarCampos(txt_cod_barras.getText(), txt_preco.getText(), txt_descricao.getText(), txt_nome.getText())){
+            this.cod_barras = Integer.parseInt(txt_cod_barras.getText());
+            this.preco = Integer.parseInt(txt_preco.getText());
+            this.descricao = txt_descricao.getText();
+            this.nome = txt_nome.getText();
+            this.qtd = Integer.parseInt(txt_qtd.getText());
+            String img = "teste";
+            AddProduto newProduto = new AddProduto(idUsuarioLogado, cod_barras, preco, descricao, nome, img, qtd);
+            if(newProduto.inserirProduto()){
+                hide();
+                JOptionPane.showMessageDialog(this, newProduto.mensage, "Sucesso", 1);
+            } else {
+                JOptionPane.showMessageDialog(this, newProduto.mensage, "Erro", 1);
+            }
         } else {
-            JOptionPane.showMessageDialog(this, newProduto.mensage, "Erro", 1);
+            JOptionPane.showMessageDialog(this, produto.mensage, "Erro", 1);
         }
+       
+
         
     }//GEN-LAST:event_addProdutoActionPerformed
+
+    private void txt_nomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nomeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nomeActionPerformed
+
+    private void txt_cod_barrasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_cod_barrasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_cod_barrasActionPerformed
+
+    private void txt_precoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_precoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_precoActionPerformed
+
+    private void txt_qtdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_qtdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_qtdActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,10 +196,10 @@ public class AdicionarProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu jPopupMenu1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JFormattedTextField txt_codBarras;
+    private javax.swing.JTextField txt_cod_barras;
     private javax.swing.JTextArea txt_descricao;
     private javax.swing.JTextField txt_nome;
-    private javax.swing.JFormattedTextField txt_preco1;
-    private javax.swing.JFormattedTextField txt_qtd;
+    private javax.swing.JTextField txt_preco;
+    private javax.swing.JTextField txt_qtd;
     // End of variables declaration//GEN-END:variables
 }

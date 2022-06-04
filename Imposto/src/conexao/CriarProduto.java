@@ -6,16 +6,23 @@ package conexao;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import backEnd.Produto;
 
 /**
  *
  * @author 55119
  */
-public class CriarProduto {
+public class CriarProduto extends Produto{
     private Conexao conexao;
     
-    public CriarProduto(){
+    public CriarProduto(Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer idUsuarioLogado ){
         this.conexao = new Conexao();
+        this.id_pessoa = idUsuarioLogado;
+        this.cod_barras = cod_barras;
+        this.preco = preco;
+        this.descricao = descricao;
+        this.nome = nome;
+        this.img = img;
     }
     
     public void inserir(){
@@ -24,12 +31,12 @@ public class CriarProduto {
         try{
             if(this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-                sentenca.setInt(1, 2);
-                sentenca.setInt(2, 200);
-                sentenca.setString(3, "Teste");
-                sentenca.setString(4, "Teste nomr");
-                sentenca.setString(5, "");
-                sentenca.setInt(6, 1);
+                sentenca.setInt(1, cod_barras);
+                sentenca.setInt(2, preco);
+                sentenca.setString(3, descricao);
+                sentenca.setString(4, nome);
+                sentenca.setString(5, img);
+                sentenca.setInt(6, id_pessoa);
                 sentenca.execute();
                 sentenca.close();
                 

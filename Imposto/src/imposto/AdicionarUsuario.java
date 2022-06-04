@@ -16,12 +16,15 @@ import javax.swing.JOptionPane;
  * @author 125111345741
  */
 public class AdicionarUsuario extends javax.swing.JFrame {
-
+    protected TipoUsuario tipo;
+    protected ArrayList<Integer> idLista;   
+    protected ArrayList<String> nomeLista;
     /**
      * Creates new form AdicionarUsuario
      */
     public AdicionarUsuario() {
         initComponents();
+        tipo = new TipoUsuario();
         listaCB();
     }
 
@@ -107,8 +110,8 @@ public class AdicionarUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addUsuarioActionPerformed
-        AddUsuario novaPessoa = new AddUsuario();
-        if(novaPessoa.inserirUsuario(txt_nome.getText(), txt_email.getText(), txt_senha.getText(), cbTipoUser.getSelectedIndex())){
+        AddUsuario novaPessoa = new AddUsuario(txt_nome.getText(), txt_email.getText(), txt_senha.getText(), cbTipoUser.getSelectedIndex());
+        if(novaPessoa.inserirUsuario()){
             hide();
             JOptionPane.showMessageDialog(this, novaPessoa.mensagem, "Sucesso", 1);
         } else{
@@ -117,11 +120,11 @@ public class AdicionarUsuario extends javax.swing.JFrame {
     }//GEN-LAST:event_addUsuarioActionPerformed
 
     public void listaCB(){
-        TipoUsuario tipo = new TipoUsuario();
+
         tipo.getTipoUsuario();
-        ArrayList<Integer> id = tipo.idLista;
-        ArrayList<String> nome = tipo.nomeLista;
-        for(String name : nome){;
+        idLista = tipo.idTipoUserLista;
+        nomeLista = tipo.nomeTipoUserLista;
+        for(String name : nomeLista){;
             cbTipoUser.addItem(name);
         }
     }

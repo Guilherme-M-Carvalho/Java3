@@ -8,25 +8,19 @@ package backEnd;
  *
  * @author 55119
  */
-public class MenuTipoUsuario {
-    public Integer idUsuarioLogado;
-    public Integer IdTipoUsuarioLogado;
-    public String nomeTipoLogado;
-    /**
-     * Creates new form Menu
-     */
+public class MenuTipoUsuario extends TipoUsuario{
+    protected Integer idUsuarioLogado;
 
-//        this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
-//        this.idUsuarioLogado = IdTipoUsuarioLogado;
-//        this.nomeTipoLogado = nomeTipoLogado;
-    public boolean validarUsuario(Integer idUsuarioLogado,Integer IdTipoUsuarioLogado, String nomeTipoLogado){
+    public MenuTipoUsuario (Integer idUsuarioLogado,Integer IdTipoUsuarioLogado, String nomeTipoLogado){
         this.idUsuarioLogado = idUsuarioLogado;
-        this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
-        this.nomeTipoLogado = nomeTipoLogado;
-        
-        if(this.nomeTipoLogado.equals("Administrador")){
+        this.idTipoUsuario = IdTipoUsuarioLogado;
+        this.nomeTipoUsuario = nomeTipoLogado;
+    }
+    
+    public Boolean validarUsuario(){
+        if(this.nomeTipoUsuario.equals("Administrador")){
             return true;
-        } else if(this.nomeTipoLogado.equals("Comum")){
+        } else if(this.nomeTipoUsuario.equals("Comum")){
             return false;
         }
         return false;

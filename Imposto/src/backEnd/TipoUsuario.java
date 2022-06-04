@@ -5,38 +5,39 @@
  */
 package backEnd;
 import conexao.BuscarTipoUser;
-import conexao.BuscarTipoUser;
 import java.util.ArrayList;
 /**
  *
  * @author 125111345741
  */
-public class TipoUsuario {
-    private Integer id;
-    private String nome;
-    private BuscarTipoUser tipoUser;
-    public ArrayList<Integer> idLista;
-    public ArrayList<String> nomeLista;
+public class TipoUsuario{
+    private BuscarTipoUser tipoUser;    
+    protected Integer idTipoUsuario;
+    protected String nomeTipoUsuario;
+ 
+    public ArrayList<Integer> idTipoUserLista;
+    public ArrayList<String> nomeTipoUserLista;
+    private ArrayList<TipoUsuario> tipoDeUsuarios;
     
-
+    public TipoUsuario(){
+        this.tipoUser = new BuscarTipoUser();
+        this.idTipoUserLista = new ArrayList<>();
+        this.nomeTipoUserLista = new ArrayList<>();
+    }
     
-    public void setId(Integer id) {
-        this.id = id;
+    public void setIdTipoUsuario(Integer id) {
+        this.idTipoUsuario = id;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeTipoUsuario(String nome) {
+        this.nomeTipoUsuario = nome;
     }
     
     public void getTipoUsuario(){
-        idLista = new ArrayList<>();
-        nomeLista = new ArrayList<>();
-        this.tipoUser = new BuscarTipoUser();
-        ArrayList<TipoUsuario> usuarios = this.tipoUser.buscar();
-        for(TipoUsuario usuario: usuarios){
-            idLista.add(usuario.id);;
-            nomeLista.add(usuario.nome);
-
+        this.tipoDeUsuarios = tipoUser.buscar();
+        for(TipoUsuario usuario: this.tipoDeUsuarios){
+            idTipoUserLista.add(usuario.idTipoUsuario);;
+            nomeTipoUserLista.add(usuario.nomeTipoUsuario);
         }
     }
 }

@@ -19,36 +19,34 @@ import conexao.Conexao;
  */
 public class BuscarPessoa {
     private Conexao conexao;
+    private ArrayList<Pessoa> listaPessoa;
+    private Pessoa pessoa;
     
     //tu e gay
     public BuscarPessoa(){
         this.conexao = new Conexao();
+        this.listaPessoa = new ArrayList<>();
     }
     
     public ArrayList<Pessoa> buscar(){
 
-        ArrayList<Pessoa> listaPessoa = new ArrayList<>();
         String sql = "select * from vw_pessoa";
         
         try{
             if(this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-                
                 ResultSet resultado = sentenca.executeQuery();
-                
                 while(resultado.next()){
-                    Pessoa pessoa = new Pessoa();
+                    this.pessoa = new Pessoa();
                     pessoa.setId(resultado.getInt("id"));
                     pessoa.setNome(resultado.getString("nome"));
                     pessoa.setEmail(resultado.getString("email"));
                     pessoa.setSenha(resultado.getString("senha"));
                     pessoa.setDataCriacao(resultado.getString("data_criacao"));
-                    pessoa.setIdTipoUser(resultado.getInt("idTipoUsuario"));
-                    pessoa.setNomeTipo(resultado.getString("nome_tipo_usuario"));
+                    pessoa.setIdTipoUsuario(resultado.getInt("idTipoUsuario"));
+                    pessoa.setNomeTipoUsuario(resultado.getString("nome_tipo_usuario"));
                     listaPessoa.add(pessoa);
                 }
-                
-                
                 sentenca.close();
                 
                 this.conexao.getConnection().close();

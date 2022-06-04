@@ -12,13 +12,15 @@ import backEnd.MenuTipoUsuario;
 public class Menu extends javax.swing.JFrame {
     public Boolean administradoSimNao;
     public MenuTipoUsuario menu;
+    protected Integer idUsuarioLogado;
     /**
      * Creates new form Menu
      */
     public Menu(Integer idUsuarioLogado, Integer IdTipoUsuarioLogado, String nomeTipoLogado) {
         initComponents();
-        this.menu = new MenuTipoUsuario();
-        this.administradoSimNao = menu.validarUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+        this.idUsuarioLogado = idUsuarioLogado;
+        this.menu = new MenuTipoUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+        this.administradoSimNao = menu.validarUsuario();
         modificarTelaUsuarioComum(administradoSimNao);
     }
     
@@ -108,7 +110,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        AdicionarProduto newProduto = new AdicionarProduto();
+        AdicionarProduto newProduto = new AdicionarProduto(idUsuarioLogado);
         newProduto.show();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 

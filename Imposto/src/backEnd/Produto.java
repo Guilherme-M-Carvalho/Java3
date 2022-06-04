@@ -8,14 +8,17 @@ package backEnd;
  *
  * @author 55119
  */
-public class Produto extends MenuTipoUsuario{
+public class Produto{
     public Integer id;
     public Integer cod_barras;
-    public Float preco;
+    public Integer preco;
     public String descricao;
     public String nome;
     public String img;
     public Integer id_pessoa;
+    
+    public Produto (){
+    }
     
     
 }

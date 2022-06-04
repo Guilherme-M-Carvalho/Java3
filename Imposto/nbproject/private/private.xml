@@ -4,8 +4,10 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/conexao/CriarProduto.java</file>
-            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/imposto/Login.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/imposto/AdicionarProduto.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/backEnd/Produto.java</file>
             <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/backEnd/AddProduto.java</file>
+            <file>file:/C:/Users/55119/Documents/GitHub/Java3/Imposto/src/conexao/CriarUsuario.java</file>
         </group>
     </open-files>
 </project-private>

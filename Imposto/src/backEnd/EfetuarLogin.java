@@ -11,15 +11,18 @@ import java.util.ArrayList;
  */
 public class EfetuarLogin extends Pessoa{
     public String menssagem;
+    public Integer idUsuarioLogado;
+    public Integer idTipoUsuarioLogado;
+    public String nomeTipoLogado;
     
-    public boolean vLogin(String email, String senha){
-        buscarPessoa();
-        if(!email.isEmpty() && !senha.isEmpty()){
+    public Boolean vLogin(String email, String senha){
+        this.buscarPessoa();
+        if(!email.isEmpty() && !senha.isEmpty()){;
             for (int i = 0; i < idLista.size(); i++) {
                 if(emailLista.get(i).equals(email)  && senhaLista.get(i).equals(senha)){
                     this.idUsuarioLogado = idLista.get(i);
                     this.idTipoUsuarioLogado = idTipoUserLista.get(i);
-                    this.nomeTipoLogado = nomeTipoLista.get(i);
+                    this.nomeTipoLogado = nomeTipoUserLista.get(i);
                     this.menssagem = "Bem vindo "+nomeLista.get(i)+"!";
                     return true;
                 }

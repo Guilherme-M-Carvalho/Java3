@@ -10,6 +10,7 @@ import conexao.BuscarPessoa;
 import backEnd.TipoUsuario;
 import java.util.ArrayList;
 import backEnd.EfetuarLogin;
+import backEnd.Pessoa;
 import javax.swing.JOptionPane;
 import conexao.CriarProduto;
 /**
@@ -139,6 +140,7 @@ public class Login extends javax.swing.JFrame {
         if(login.vLogin(txt_Email.getText(), txt_Senha.getText())){
            Menu menu  = new Menu(login.idUsuarioLogado, login.idTipoUsuarioLogado, login.nomeTipoLogado);
            menu.show();
+           hide();
            JOptionPane.showMessageDialog(this, login.menssagem, "Sucesso", 1);
         } else {
            JOptionPane.showMessageDialog(this, login.menssagem, "Erro", 1);
@@ -179,10 +181,6 @@ public class Login extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
-        CriarProduto u = new CriarProduto();
-        u.inserir();
-        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
