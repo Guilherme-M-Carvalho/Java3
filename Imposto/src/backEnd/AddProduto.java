@@ -14,7 +14,6 @@ public class AddProduto extends Produto {
     protected Integer qtd;
     
     public AddProduto(){
-        
     }
     
     public AddProduto(Integer idUsuarioLogado, Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer qtd){
@@ -25,7 +24,6 @@ public class AddProduto extends Produto {
         this.nome = nome;
         this.qtd = qtd;
         this.img = img;
-        this.criarProduto = new CriarProduto(this.cod_barras, this.preco, this.descricao, this.nome, this.img, this.id_pessoa);;
     }
     
     public Boolean validarCampos(String cod_barras, String preco, String descricao, String nome){
@@ -36,10 +34,10 @@ public class AddProduto extends Produto {
         return false;
     }
     
-    public Boolean inserirProduto(){
+    public Boolean cadastrarProduto(){
         if(!cod_barras.toString().isEmpty() && !preco.toString().isEmpty() && !descricao.isEmpty() && !nome.isEmpty() && !qtd.toString().isEmpty()){
             for (int i = 0; i < qtd; i++) {
-                criarProduto.inserir();
+                this.inserirProduto();
             }
             this.mensage = qtd +" produtos inseridos!";
             return true;

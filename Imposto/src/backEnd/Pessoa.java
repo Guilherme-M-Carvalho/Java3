@@ -34,6 +34,7 @@ public class Pessoa extends TipoUsuario{
     protected ArrayList<String> dataCriacaoLista;
    
     private ArrayList<Pessoa> pessoas;
+    private CriarUsuario criarUsuario;
 
     
    
@@ -44,6 +45,13 @@ public class Pessoa extends TipoUsuario{
         this.emailLista = new ArrayList<>();
         this.senhaLista = new ArrayList<>();
         this.dataCriacaoLista = new ArrayList<>();
+    }
+    
+    public Pessoa(String nome, String email, String senha, Integer idTipo){
+        this.nome = nome;
+        this.email = email;
+        this.senha = senha;
+        this.idTipoUsuario = idTipo;
     }
     
 
@@ -79,5 +87,12 @@ public class Pessoa extends TipoUsuario{
             this.nomeTipoUserLista.add(p.nomeTipoUsuario);
         }
     }
+    
+    public void inserirPessoa(){
+        this.criarUsuario = new CriarUsuario(this.nome, this.email, this.senha, this.idTipoUsuario);
+        criarUsuario.inserir();
+    }
+    
+    
 }
 

@@ -10,7 +10,7 @@ import conexao.CriarUsuario;
  * @author 55119
  */
 public class AddUsuario extends Pessoa{
-    private CriarUsuario criarUsuario;
+
     public String mensagem;
     
     public AddUsuario(String nome, String email, String senha, Integer idTipo){
@@ -18,7 +18,6 @@ public class AddUsuario extends Pessoa{
         this.email = email;
         this.senha = senha;
         this.idTipoUsuario = idTipo;
-        this.criarUsuario = new CriarUsuario(this.nome, this.email, this.senha, this.idTipoUsuario);
     }
     
     public Boolean emailExite(String emailForm){
@@ -42,7 +41,7 @@ public class AddUsuario extends Pessoa{
         if(!nome.isEmpty() && !email.isEmpty() && !senha.isEmpty() && !idTipoUsuario.toString().isEmpty()){
             if(validarCB(idTipoUsuario)){
                 if(!emailExite(email)){
-                    criarUsuario.inserir();
+                    this.inserirPessoa();
                     this.mensagem = "Usuário "+ nome +" cadastrado com sucesso!";
                     return true;
                 } else {

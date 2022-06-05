@@ -157,7 +157,7 @@ public class AdicionarProduto extends javax.swing.JFrame {
             this.qtd = Integer.parseInt(txt_qtd.getText());
             String img = "teste";
             AddProduto newProduto = new AddProduto(idUsuarioLogado, cod_barras, preco, descricao, nome, img, qtd);
-            if(newProduto.inserirProduto()){
+            if(newProduto.cadastrarProduto()){
                 hide();
                 JOptionPane.showMessageDialog(this, newProduto.mensage, "Sucesso", 1);
             } else {
