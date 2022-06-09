@@ -4,15 +4,7 @@
  * and open the template in the editor.
  */
 package backEnd;
-import javax.swing.JOptionPane;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import conexao.CriarUsuario;
 import conexao.BuscarPessoa;
-import conexao.BuscarPessoa;
-import conexao.Conexao;
 import conexao.CriarUsuario;
 import java.util.ArrayList;
 /**
@@ -27,11 +19,11 @@ public class Pessoa extends TipoUsuario{
     protected String senha;
     protected String dataCriacao;
     
-    protected ArrayList<Integer> idLista;
-    protected ArrayList<String> nomeLista;
-    protected ArrayList<String> emailLista;
-    protected ArrayList<String> senhaLista;
-    protected ArrayList<String> dataCriacaoLista;
+    public ArrayList<Integer> idLista;
+    public ArrayList<String> nomeLista;
+    public ArrayList<String> emailLista;
+    public ArrayList<String> senhaLista;
+    public ArrayList<String> dataCriacaoLista;
    
     private ArrayList<Pessoa> pessoas;
     private CriarUsuario criarUsuario;
