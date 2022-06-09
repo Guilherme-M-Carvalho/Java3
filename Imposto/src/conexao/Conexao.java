@@ -23,7 +23,7 @@ public class Conexao {
         this.servidor = "localhost";
         this.banco = "sistema";
         this.usuario = "root";
-        this.senha = "root";
+        this.senha = "admin";
     }
     
     public boolean conectar(){
