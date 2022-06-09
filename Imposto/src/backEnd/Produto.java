@@ -20,7 +20,7 @@ public class Produto{
     protected String nome;
     protected String img;
     protected Integer id_pessoa;
-   
+
     private CriarProduto criarProduto;
     private BuscaProduto buscarProduto;
     
@@ -56,8 +56,8 @@ public class Produto{
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
+    }   
+    
     public void setCod_barras(Integer cod_barras) {
         this.cod_barras = cod_barras;
     }

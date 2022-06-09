@@ -11,7 +11,7 @@ import javax.swing.*;
  *
  * @author 55119
  */
-public class ListarProduto{
+public class ListarProduto extends Produto{
     protected JLabel txt_nome;
     protected JLabel txt_preco;
     protected JTextArea txt_descricao;

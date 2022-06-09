@@ -11,6 +11,7 @@ import backEnd.TipoUsuario;
 import java.util.ArrayList;
 import backEnd.EfetuarLogin;
 import backEnd.Pessoa;
+import backEnd.Produto;
 import javax.swing.JOptionPane;
 import conexao.CriarProduto;
 /**

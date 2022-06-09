@@ -15,7 +15,7 @@ import java.util.ArrayList;
  *
  * @author 55119
  */
-public class BuscaProduto extends Produto{
+public class BuscaProduto{
     private Conexao conexao;
     private ArrayList<Produto> listaProduto;
     private Produto produto;
