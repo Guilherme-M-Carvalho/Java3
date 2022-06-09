@@ -58,8 +58,6 @@ public class ComprarProduto extends javax.swing.JFrame {
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         listaProdutos.setBackground(new java.awt.Color(204, 255, 255));
         listaProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

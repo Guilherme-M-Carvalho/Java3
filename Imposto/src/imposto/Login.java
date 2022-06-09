@@ -60,7 +60,6 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        txt_Email.setText("admin");
         txt_Email.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txt_Email.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
