@@ -4,6 +4,7 @@
  */
 package imposto;
 
+import backEnd.CadCompra;
 import backEnd.Produto;
 import java.awt.Color;
 import java.awt.Font;
@@ -25,11 +26,14 @@ public class ComprarProduto extends javax.swing.JFrame {
     private DefaultTableModel listaProduto;
     private DefaultTableModel compraProduto;
     private ArrayList<Integer> idListaComprar;
+    private String idComprar;
+    private CadCompra compra;
+    private Integer idPessoaLogado;
 
     /**
      * Creates new form VisualizarProdutos
      */
-    public ComprarProduto() {
+    public ComprarProduto(Integer idPessoaLogado) {
         initComponents();
         this.produtos = new Produto();
         this.nomeProduto = new ArrayList<>();
@@ -37,6 +41,8 @@ public class ComprarProduto extends javax.swing.JFrame {
         compraProduto = new DefaultTableModel();
         idListaComprar = new ArrayList<>();
         produtos.getProdutos();
+        this.idPessoaLogado = idPessoaLogado;
+
         listarProdutos();
     }
 
@@ -180,15 +186,25 @@ public class ComprarProduto extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if(comprarProdutos.getSelectedRow()!=-1){
+        if(comprarProdutos.getSelectedRow()!= -1){
+
+            System.out.println(comprarProdutos.getSelectedRow());
+            idListaComprar.remove(comprarProdutos.getSelectedRow());
             compraProduto.removeRow(comprarProdutos.getSelectedRow());
             JOptionPane.showMessageDialog(this,"Produto excluido" , "Sucesso", 1);
-            idListaComprar.remove(comprarProdutos.getSelectedRow());
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        // TODO add your handling code here:
+        idComprar = "";
+        for(Integer id : idListaComprar){
+            idComprar +=id+";";
+        }
+        this.compra = new CadCompra(idPessoaLogado,idComprar);
+        if(compra.comprar()){
+            JOptionPane.showMessageDialog(this, compra.mensagem, "Sucesso", 1 );
+            hide();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     public void listarProdutos(){
@@ -206,6 +222,7 @@ public class ComprarProduto extends javax.swing.JFrame {
             row[3] = produtos.descricaoLista.get(i);
             listaProduto.addRow(row);
         }
+        
         
 
     }
