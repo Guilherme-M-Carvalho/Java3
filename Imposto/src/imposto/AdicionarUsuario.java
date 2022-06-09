@@ -19,11 +19,17 @@ public class AdicionarUsuario extends javax.swing.JFrame {
     protected TipoUsuario tipo;
     protected ArrayList<Integer> idLista;   
     protected ArrayList<String> nomeLista;
+    public Integer idUsuarioLogado;
+    public Integer IdTipoUsuarioLogado;
+    public String nomeTipoLogado;
     /**
      * Creates new form AdicionarUsuario
      */
-    public AdicionarUsuario() {
+    public AdicionarUsuario(Integer idUsuarioLogado,Integer IdTipoUsuarioLogado,String nomeTipoLogado) {
         initComponents();
+        this.idUsuarioLogado = idUsuarioLogado;
+        this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
+        this.nomeTipoLogado = nomeTipoLogado;
         tipo = new TipoUsuario();
         listaCB();
     }
@@ -113,6 +119,8 @@ public class AdicionarUsuario extends javax.swing.JFrame {
         AddUsuario novaPessoa = new AddUsuario(txt_nome.getText(), txt_email.getText(), txt_senha.getText(), cbTipoUser.getSelectedIndex());
         if(novaPessoa.inserirUsuario()){
             hide();
+            Menu m = new Menu(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+            m.show();
             JOptionPane.showMessageDialog(this, novaPessoa.mensagem, "Sucesso", 1);
         } else{
             JOptionPane.showMessageDialog(this, novaPessoa.mensagem, "Erro", 1);
