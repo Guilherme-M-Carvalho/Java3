@@ -98,7 +98,7 @@ public class ComprarProduto extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setText("Salvar");
+        jButton3.setText("Comprar");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton3ActionPerformed(evt);

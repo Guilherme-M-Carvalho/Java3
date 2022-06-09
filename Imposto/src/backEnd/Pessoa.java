@@ -36,7 +36,26 @@ public class Pessoa extends TipoUsuario{
     private ArrayList<Pessoa> pessoas;
     private CriarUsuario criarUsuario;
 
+    public ArrayList<Pessoa> getPessoa(){
+        return pessoas;
+    }
+     
+     public ArrayList<Integer> getId(){
+        return this.idLista;
+    }
     
+    
+    public ArrayList<String> getNome(){
+        return this.nomeLista;
+    }
+    
+    public ArrayList<String> getEmail(){
+        return this.emailLista;
+    }
+    
+    public ArrayList<String> getSenha(){
+        return this.senhaLista;
+    }
    
     public Pessoa(){
         this.buscarPessoa = new BuscarPessoa();

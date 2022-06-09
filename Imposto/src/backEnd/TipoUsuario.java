@@ -14,6 +14,7 @@ public class TipoUsuario{
     private BuscarTipoUser tipoUser;    
     protected Integer idTipoUsuario;
     protected String nomeTipoUsuario;
+    
  
     public ArrayList<Integer> idTipoUserLista;
     public ArrayList<String> nomeTipoUserLista;
