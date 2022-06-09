@@ -20,11 +20,18 @@ public class TipoUsuario{
     public ArrayList<String> nomeTipoUserLista;
     private ArrayList<TipoUsuario> tipoDeUsuarios;
     
+ 
+    
     public TipoUsuario(){
         this.tipoUser = new BuscarTipoUser();
         this.idTipoUserLista = new ArrayList<>();
         this.nomeTipoUserLista = new ArrayList<>();
     }
+    
+       public int getIdTipo(){
+        return this.idTipoUsuario;
+    }
+           
     
     public void setIdTipoUsuario(Integer id) {
         this.idTipoUsuario = id;

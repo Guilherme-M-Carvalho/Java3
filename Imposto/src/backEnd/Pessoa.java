@@ -56,7 +56,7 @@ public class Pessoa extends TipoUsuario{
     public ArrayList<String> getSenha(){
         return this.senhaLista;
     }
-   
+    
     public Pessoa(){
         this.buscarPessoa = new BuscarPessoa();
         this.idLista = new ArrayList<>();
