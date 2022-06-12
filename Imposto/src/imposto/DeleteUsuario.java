@@ -20,6 +20,7 @@ public class DeleteUsuario extends javax.swing.JFrame {
     private DelUsuario deletar;
     private Pessoa pessoa;
     private int idSelecionado;
+<<<<<<< HEAD
     private Integer idUsuarioLogado;
     private Integer IdTipoUsuarioLogado;
     private String nomeTipoLogado;
@@ -31,6 +32,13 @@ public class DeleteUsuario extends javax.swing.JFrame {
         this.idUsuarioLogado = idUsuarioLogado;
         this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
         this.nomeTipoLogado = nomeTipoLogado;
+=======
+    /**
+     * Creates new form DeleteUsuario
+     */
+    public DeleteUsuario() {
+        initComponents();
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
         modelUsuario = new DefaultTableModel();
         pessoa = new Pessoa();
         pessoa.buscarPessoa();
@@ -116,9 +124,12 @@ public class DeleteUsuario extends javax.swing.JFrame {
             deletar = new DelUsuario(pessoa.idLista.get(idSelecionado));
             if(deletar.deletarUsuario()){
                 JOptionPane.showMessageDialog(this, deletar.mensagem, "Sucesso", 1);
+<<<<<<< HEAD
                 hide();
                 Menu m = new Menu(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
                 m.show();
+=======
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
             }
         }
     }//GEN-LAST:event_btnDeleteActionPerformed

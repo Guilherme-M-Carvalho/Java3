@@ -110,17 +110,18 @@ public class BuscarUsuarios extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void listarPessoas(){
-    Object[] row = new Object[4];
+    Object[] row = new Object[5];
     tabelaListarUsuarios.setModel(modelListarPessoa);
 
-    Object[] column = {"Nome", "Email", "Senha", "Nivel"};
+    Object[] column = {"Nome", "Email", "Senha","Data criação", "Nivel"};
     modelListarPessoa.setColumnIdentifiers(column);
 
     for(int i = 0 ; i < pessoa.idTipoUserLista.size(); i++){
         row[0] = pessoa.getNome().get(i);
         row[1] = pessoa.getEmail().get(i);
         row[2] = pessoa.getSenha().get(i);
-        row[3] = pessoa.nomeTipoUserLista.get(i);
+        row[3] = pessoa.dataCriacaoLista.get(i);
+        row[4] = pessoa.nomeTipoUserLista.get(i);
         
         modelListarPessoa.addRow(row);
     }

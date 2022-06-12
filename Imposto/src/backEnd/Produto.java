@@ -21,11 +21,20 @@ public class Produto{
     protected String nome;
     protected String img;
     protected Integer id_pessoa;
+<<<<<<< HEAD
     protected Integer qtd;
     protected Integer idStatusProduto;
     protected String DataCriacao;
     protected String nomeStatusProduto;
+=======
+<<<<<<< Updated upstream
+   
+=======
+    private Integer qtd;
+    
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
 
+>>>>>>> Stashed changes
     private CriarProduto criarProduto;
     private BuscaProduto buscarProduto;
     private BuscarProdutoGrafico produtoGrafico;
@@ -40,9 +49,12 @@ public class Produto{
     public ArrayList<String> imgLista;
     public ArrayList<Integer> id_pessoaLista;
     public ArrayList<Integer> qtdLista;
+<<<<<<< HEAD
     public ArrayList<Integer> idStatusLista;
     public ArrayList<String> dataCriacaoLista;
     public ArrayList<String> nomeStatusLista;
+=======
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
     
     public Produto (){
         this.buscarProduto = new BuscaProduto();
@@ -56,9 +68,12 @@ public class Produto{
         this.nomeLista = new ArrayList<>();
         this.imgLista = new ArrayList<>();
         this.id_pessoaLista = new ArrayList<>();
+<<<<<<< HEAD
         this.idStatusLista = new ArrayList<>();
         this.dataCriacaoLista = new ArrayList<>();
         this.nomeStatusLista = new ArrayList<>();
+=======
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
         produtoGrafico = new BuscarProdutoGrafico();
     }
     
@@ -77,10 +92,14 @@ public class Produto{
         this.qtd = qtd;
     }
 
+    public void setQtd(Integer qtd) {
+        this.qtd = qtd;
+    }
+
     public void setId(Integer id) {
         this.id = id;
-    }   
-    
+    }
+
     public void setCod_barras(Integer cod_barras) {
         this.cod_barras = cod_barras;
     }
@@ -163,6 +182,17 @@ public class Produto{
             this.cod_barrasLista.add(p.cod_barras);
             this.precoLista.add(p.preco);
             this.nomeLista.add(p.nome);
+            this.qtdLista.add(p.qtd);
+        }
+    }
+    
+    public void getProdutosGrafico(){
+        p = produtoGrafico.buscarP();
+        for(Produto p: p){
+            this.cod_barrasLista.add(p.cod_barras);
+            this.precoLista.add(p.preco);
+            this.nomeLista.add(p.nome);
+            System.out.println(p.qtd);
             this.qtdLista.add(p.qtd);
         }
     }

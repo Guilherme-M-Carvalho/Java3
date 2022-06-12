@@ -26,7 +26,11 @@ public class BuscarProdutoGrafico {
     
     public ArrayList<Produto> buscarP(){
 
+<<<<<<< HEAD
         String sql = "select distinct cod_barras, id, preco, nome, descricao, data_criacao, idStatusProduto, nomeStatusProduto, count(cod_barras) from vw_produtos group by cod_barras";
+=======
+        String sql = "select distinct cod_barras, preco, nome, count(cod_barras) from produto group by cod_barras";
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
         
         try{
             if(this.conexao.conectar()){
@@ -34,6 +38,7 @@ public class BuscarProdutoGrafico {
                 ResultSet resultado = sentenca.executeQuery();
                 while(resultado.next()){
                     this.produto = new Produto();
+<<<<<<< HEAD
                     produto.setId(resultado.getInt("id"));
                     produto.setCod_barras(resultado.getInt("cod_barras"));
                     produto.setPreco(resultado.getInt("preco"));
@@ -42,6 +47,11 @@ public class BuscarProdutoGrafico {
                     produto.setData_criacao(resultado.getString("data_criacao"));
                     produto.setIdStatusProduto(resultado.getInt("idStatusProduto"));
                     produto.setNomeStatusProduto(resultado.getString("nomeStatusProduto"));
+=======
+                    produto.setCod_barras(resultado.getInt("cod_barras"));
+                    produto.setPreco(resultado.getInt("preco"));
+                    produto.setNome(resultado.getString("nome"));
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
                     produto.setQtd(resultado.getInt("count(cod_barras)"));
                     listaProduto.add(produto);
                 }

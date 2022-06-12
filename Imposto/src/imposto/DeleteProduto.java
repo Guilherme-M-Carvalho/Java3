@@ -20,6 +20,7 @@ public class DeleteProduto extends javax.swing.JFrame {
     private DelProduto deletar;
     private Produto produto;
     private int idSelecionado;
+<<<<<<< HEAD
     private Integer idUsuarioLogado;
     private Integer IdTipoUsuarioLogado;
     private String nomeTipoLogado;
@@ -29,6 +30,11 @@ public class DeleteProduto extends javax.swing.JFrame {
         this.idUsuarioLogado = idUsuarioLogado;
         this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
         this.nomeTipoLogado = nomeTipoLogado;
+=======
+
+    public DeleteProduto() {
+        initComponents();
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
         modelProduto = new DefaultTableModel();
         produto = new Produto();
         produto.getProdutos();
@@ -113,9 +119,12 @@ public class DeleteProduto extends javax.swing.JFrame {
             deletar = new DelProduto(produto.idLista.get(idSelecionado));
             if (deletar.deletarProduto()) {
                 JOptionPane.showMessageDialog(this, deletar.mensagem, "Sucesso", 1);
+<<<<<<< HEAD
                 hide();
                 Menu m = new Menu(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
                 m.show();
+=======
+>>>>>>> fa63fa46f4f87a6b6a725c1c21c8791010eb248e
             }
         }
 

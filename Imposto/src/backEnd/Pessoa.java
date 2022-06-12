@@ -4,15 +4,7 @@
  * and open the template in the editor.
  */
 package backEnd;
-import javax.swing.JOptionPane;
-import java.sql.SQLException;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.ArrayList;
-import conexao.CriarUsuario;
 import conexao.BuscarPessoa;
-import conexao.BuscarPessoa;
-import conexao.Conexao;
 import conexao.CriarUsuario;
 import java.util.ArrayList;
 /**
