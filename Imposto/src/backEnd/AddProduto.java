@@ -4,6 +4,8 @@
  */
 package backEnd;
 import conexao.CriarProduto;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 /**
  *
  * @author 55119
@@ -12,11 +14,12 @@ public class AddProduto extends Produto {
     public CriarProduto criarProduto;
     public String mensage;
     protected Integer qtd;
+    protected String data;
     
     public AddProduto(){
     }
     
-    public AddProduto(Integer idUsuarioLogado, Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer qtd){
+    public AddProduto(Integer idUsuarioLogado, Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer qtd, Integer idStatusProduto){
         this.id_pessoa = idUsuarioLogado;
         this.cod_barras = cod_barras;
         this.preco = preco;
@@ -24,6 +27,13 @@ public class AddProduto extends Produto {
         this.nome = nome;
         this.qtd = qtd;
         this.img = img;
+        this.idStatusProduto = idStatusProduto;
+        Date data = new Date(System.currentTimeMillis()); 
+        SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+        this.data = formatarDate.format(data).toString();
+        System.out.print(this.data);
+        
+       
     }
     
     public Boolean validarCampos(String cod_barras, String preco, String descricao, String nome){
@@ -36,8 +46,10 @@ public class AddProduto extends Produto {
     
     public Boolean cadastrarProduto(){
         if(!cod_barras.toString().isEmpty() && !preco.toString().isEmpty() && !descricao.isEmpty() && !nome.isEmpty() && !qtd.toString().isEmpty()){
+            criarProduto = new CriarProduto(this.cod_barras, this.preco, this.descricao, this.nome, this.img, this.id_pessoa, this.idStatusProduto, data);
             for (int i = 0; i < qtd; i++) {
-                this.inserirProduto();
+                criarProduto.inserirProduto();
+                System.out.print(data);
             }
             this.mensage = qtd +" produtos inseridos!";
             return true;

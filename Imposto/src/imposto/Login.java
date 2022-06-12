@@ -14,6 +14,8 @@ import backEnd.Pessoa;
 import backEnd.Produto;
 import javax.swing.JOptionPane;
 import conexao.CriarProduto;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -67,7 +69,6 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        txt_Senha.setText("admin");
         txt_Senha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_SenhaActionPerformed(evt);
@@ -170,8 +171,6 @@ public class Login extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        
-
         
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

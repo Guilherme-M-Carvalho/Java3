@@ -12,6 +12,8 @@ import javax.swing.JOptionPane;
  */
 public class AdicionarProduto extends javax.swing.JFrame {
     public Integer idUsuarioLogado;
+    public Integer IdTipoUsuarioLogado;
+    public String nomeTipoLogado;
     private Integer cod_barras;
     private Integer preco;
     private String descricao;
@@ -19,10 +21,15 @@ public class AdicionarProduto extends javax.swing.JFrame {
     private Integer qtd;
     /**
      * Creates new form AdicionarProduto
+     * 
      */
-    public AdicionarProduto(Integer idUsuarioLogado) {
+    
+    public AdicionarProduto(Integer idUsuarioLogado,Integer IdTipoUsuarioLogado,String nomeTipoLogado) {
         initComponents();
         this.idUsuarioLogado = idUsuarioLogado;
+        this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
+        this.nomeTipoLogado = nomeTipoLogado;
+        
     }
 
     /**
@@ -181,9 +188,11 @@ public class AdicionarProduto extends javax.swing.JFrame {
             this.nome = txt_nome.getText();
             this.qtd = Integer.parseInt(txt_qtd.getText());
             String img = "teste";
-            AddProduto newProduto = new AddProduto(idUsuarioLogado, cod_barras, preco, descricao, nome, img, qtd);
+            AddProduto newProduto = new AddProduto(idUsuarioLogado, cod_barras, preco, descricao, nome, img, qtd, 1);
             if(newProduto.cadastrarProduto()){
                 hide();
+                Menu m = new Menu(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+                m.show();
                 JOptionPane.showMessageDialog(this, newProduto.mensage, "Sucesso", 1);
             } else {
                 JOptionPane.showMessageDialog(this, newProduto.mensage, "Erro", 1);

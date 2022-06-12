@@ -4,6 +4,8 @@
  */
 package backEnd;
 import conexao.UpdateProduto;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -13,20 +15,26 @@ public class EditProduto extends Produto {
     
     public UpdateProduto updateProduto;
     public String mensagem;
+    private String data;
     
-    public EditProduto( Integer id, Integer preco, String nome, String descricao  ){
+    public EditProduto( Integer codBarras, Integer preco, String nome, String descricao, String data, Integer idStatusProduto){
         
-        this.id = id;
+        this.cod_barras = codBarras;
         this.descricao = descricao;
         this.preco = preco; 
         this.nome = nome;
-        
-        this.updateProduto = new UpdateProduto(this.preco, this.descricao, this.nome, this.id);
+        this.DataCriacao = data;
+        this.idStatusProduto = idStatusProduto;
+        Date dataa = new Date(System.currentTimeMillis()); 
+        SimpleDateFormat formatarDate = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss"); 
+        this.data = formatarDate.format(dataa).toString();
+        System.out.print(this.data);
+        this.updateProduto = new UpdateProduto(this.preco, this.descricao, this.nome, this.cod_barras, this.DataCriacao, this.idStatusProduto, this.data);
         
     }
     
     public boolean validaUpdate(){
-        if( !this.id.toString().isEmpty() && !this.descricao.isEmpty() && !this.nome.isEmpty() && !this.preco.toString().isEmpty()){
+        if( !this.cod_barras.toString().isEmpty() && !this.descricao.isEmpty() && !this.nome.isEmpty() && !this.preco.toString().isEmpty()){
             
             return true;
             

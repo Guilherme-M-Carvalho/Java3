@@ -7,6 +7,8 @@ package conexao;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import backEnd.Produto;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -15,7 +17,7 @@ import backEnd.Produto;
 public class CriarProduto extends Produto{
     private Conexao conexao;
     
-    public CriarProduto(Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer idUsuarioLogado ){
+    public CriarProduto(Integer cod_barras, Integer preco, String descricao, String nome, String img, Integer idUsuarioLogado, Integer idStatusProduto, String data){
         this.conexao = new Conexao();
         this.id_pessoa = idUsuarioLogado;
         this.cod_barras = cod_barras;
@@ -23,10 +25,13 @@ public class CriarProduto extends Produto{
         this.descricao = descricao;
         this.nome = nome;
         this.img = img;
+        this.idStatusProduto = idStatusProduto;
+        this.DataCriacao = data;
     }
     
     public void inserir(){
-        String sql = "insert into produto (cod_barras, preco, descricao, nome, img, id_pessoa) values (?,?,?,?,?,?)";
+        String sql = "insert into produto (cod_barras, preco, descricao, nome, img, id_pessoa, idStatusProduto, data_criacao) values (?,?,?,?,?,?,?,?)";
+        
         
         try{
             if(this.conexao.conectar()){
@@ -37,6 +42,9 @@ public class CriarProduto extends Produto{
                 sentenca.setString(4, nome);
                 sentenca.setString(5, img);
                 sentenca.setInt(6, id_pessoa);
+                sentenca.setInt(7, idStatusProduto);
+                sentenca.setString(8, DataCriacao);
+                System.out.println(DataCriacao);
                 sentenca.execute();
                 sentenca.close();
                 

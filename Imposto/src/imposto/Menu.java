@@ -24,7 +24,8 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 import org.jfree.data.xy.XYSeries;
 import org.jfree.data.xy.XYSeriesCollection;
-
+import backEnd.Pessoa;
+import backEnd.Produto;
 /**
  *
  * @author 125111345741
@@ -35,25 +36,27 @@ public class Menu extends javax.swing.JFrame {
     protected Integer idUsuarioLogado;
     private ListarProduto produtor;
     private JPanel produto;
+    private Pessoa pessoa;
+    private Produto produtos;
+    private Integer IdTipoUsuarioLogado;
+    private String nomeTipoLogado;
+//    private Produto produto;
     /**
      * Creates new form Menu
      */
     public Menu(Integer idUsuarioLogado, Integer IdTipoUsuarioLogado, String nomeTipoLogado) {
-
         initComponents();
-        
+        this.IdTipoUsuarioLogado = IdTipoUsuarioLogado;
+        this.nomeTipoLogado = nomeTipoLogado;
+        pessoa = new Pessoa();
+        produtos = new Produto();
         produtor = new ListarProduto();
-        produto = produtor.criarPanelProduto();
-        System.out.println(produto);
-        add(produto);
-        jPanel2.add(produto);
-        
+        crirGraficoPizza();
         this.idUsuarioLogado = idUsuarioLogado;
         this.menu = new MenuTipoUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
         this.administradoSimNao = menu.validarUsuario();
         modificarTelaUsuarioComum(administradoSimNao);
         criarComLinha();
-        graficoComLinha();
 
     }
     
@@ -61,20 +64,23 @@ public class Menu extends javax.swing.JFrame {
         if(!administradoSimNao){
             item_novo.setVisible(false);
             item_editar.setVisible(false);
+            menuDeletar.setVisible(false);
         }
     }
 
-    public void criarComLinha(){
+
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.addValue(4, "Ciencias", "Kiko");
-        dataset.addValue(7, "Matematica", "Kiko");
-        dataset.addValue(1, "Ciencias", "Chaves");
-        dataset.addValue(10, "Matematica", "Chaves");
+        public void criarComLinha(){
+            produtos.getProdutosGrafico();
+            for (int i =0; i < produtos.cod_barrasLista.size(); i++ ){
+                dataset.addValue(produtos.precoLista.get(i)*produtos.qtdLista.get(i), "Lucro", produtos.nomeLista.get(i));
+                dataset.addValue(produtos.precoLista.get(i), "Preço", produtos.nomeLista.get(i));
+        }
         
         JFreeChart chart = ChartFactory.createLineChart(
-            "Comparação de notas",
-            "Alunos",
-            "Notas",
+            "Comparação de preço com lucro na venda",
+            "Produtos",
+            "Valor",
             dataset,
             PlotOrientation.VERTICAL,
             true,
@@ -93,22 +99,31 @@ public class Menu extends javax.swing.JFrame {
         CategoryItemRenderer renderer = p.getRenderer();
         renderer.setSeriesPaint(1, Color.red);
         renderer.setSeriesPaint(0, Color.green);
-        ChartFrame frame1 = new ChartFrame("Grafico de linhas", chart);
+        ChartPanel frame1 = new ChartPanel(chart);
         frame1.setVisible(true);
-        frame1.setSize(300, 300);
+        frame1.setSize(600, 550);
+        jPanel1.add(frame1);
         
     }
     
     public void crirGraficoPizza(){
+        pessoa.buscarPessoa();
         DefaultPieDataset pizza = new DefaultPieDataset();
-        pizza.setValue("Brasil", 5);
-        pizza.setValue("Alemanha", 4);
-        pizza.setValue("Italia", 4);
-        pizza.setValue("Argentina", 2);
-        pizza.setValue("França", 1);
+        Integer qtdAdm = 0;
+        Integer qtdComum = 0;
+        for(int i = 0; i < pessoa.nomeLista.size(); i++){
+            if(pessoa.nomeTipoUserLista.get(i).equals("Administrador")){
+                qtdAdm++;
+            } else if (pessoa.nomeTipoUserLista.get(i).equals("Comum")){
+                qtdComum++;
+            }
+        }
+        System.out.println(qtdAdm+"/"+qtdComum);
+        pizza.setValue("Administrador", qtdAdm);
+        pizza.setValue("Comum", qtdComum);
         
         JFreeChart grafico = ChartFactory.createPieChart(
-            "Campeoes mundiais", 
+            "Usuários", 
             pizza, 
             true, 
             true, 
@@ -116,11 +131,10 @@ public class Menu extends javax.swing.JFrame {
         );
         
         PiePlot fatia = (PiePlot) grafico.getPlot();
-        fatia.setSectionPaint("Brasil", Color.YELLOW);
         ChartPanel painel = new ChartPanel(grafico);
         painel.setVisible(true);
-        painel.setSize(500, 500);
-        add(painel);
+        painel.setSize(600,550 );
+        graficoPizza.add(painel);
         
     }
     
@@ -185,7 +199,8 @@ public class Menu extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenu1 = new javax.swing.JMenu();
-        jPanel2 = new javax.swing.JPanel();
+        graficoPizza = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         item_novo = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
@@ -199,22 +214,36 @@ public class Menu extends javax.swing.JFrame {
         jMenuItem8 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
         jMenuItem6 = new javax.swing.JMenuItem();
+        menuDeletar = new javax.swing.JMenu();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(0, 0, 255));
+        graficoPizza.setPreferredSize(new java.awt.Dimension(636, 650));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 275, Short.MAX_VALUE)
+        javax.swing.GroupLayout graficoPizzaLayout = new javax.swing.GroupLayout(graficoPizza);
+        graficoPizza.setLayout(graficoPizzaLayout);
+        graficoPizzaLayout.setHorizontalGroup(
+            graficoPizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 636, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 161, Short.MAX_VALUE)
+        graficoPizzaLayout.setVerticalGroup(
+            graficoPizzaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 690, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
         );
 
         item_novo.setText("Novo");
@@ -290,6 +319,26 @@ public class Menu extends javax.swing.JFrame {
 
         jMenuBar1.add(jMenu2);
 
+        menuDeletar.setText("Deletar");
+
+        jMenuItem9.setText("Deletar usuário");
+        jMenuItem9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem9ActionPerformed(evt);
+            }
+        });
+        menuDeletar.add(jMenuItem9);
+
+        jMenuItem10.setText("Deletar produto");
+        jMenuItem10.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem10ActionPerformed(evt);
+            }
+        });
+        menuDeletar.add(jMenuItem10);
+
+        jMenuBar1.add(menuDeletar);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -297,29 +346,35 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(52, 52, 52)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(73, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(graficoPizza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(graficoPizza, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(269, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        AdicionarUsuario newUser = new AdicionarUsuario();
+        AdicionarUsuario newUser = new AdicionarUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
         newUser.show();
+        hide();
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        AdicionarProduto newProduto = new AdicionarProduto(idUsuarioLogado);
+        AdicionarProduto newProduto = new AdicionarProduto(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
         newProduto.show();
+        hide();
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
@@ -333,7 +388,7 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-        ComprarProduto vProdutos = new ComprarProduto();
+        ComprarProduto vProdutos = new ComprarProduto(idUsuarioLogado);
         vProdutos.show();
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
@@ -351,11 +406,27 @@ public class Menu extends javax.swing.JFrame {
         buscarUser.show();
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
+    private void jMenuItem9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem9ActionPerformed
+        // TODO add your handling code here:
+        DeleteUsuario delUser = new DeleteUsuario(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+        delUser.show();
+        hide();
+                
+    }//GEN-LAST:event_jMenuItem9ActionPerformed
+
+    private void jMenuItem10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem10ActionPerformed
+        // TODO add your handling code here:
+          DeleteProduto delProd = new DeleteProduto(idUsuarioLogado, IdTipoUsuarioLogado, nomeTipoLogado);
+        delProd.show();
+        hide();
+    }//GEN-LAST:event_jMenuItem10ActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel graficoPizza;
     private javax.swing.JMenu item_editar;
     private javax.swing.JMenu item_novo;
     private javax.swing.JMenu item_visualizar;
@@ -363,6 +434,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -370,6 +442,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem6;
     private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenu menuDeletar;
     // End of variables declaration//GEN-END:variables
 }

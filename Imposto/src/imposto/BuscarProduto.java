@@ -109,17 +109,19 @@ public class BuscarProduto extends javax.swing.JFrame {
     }
     
     public void listarProdutos(){
-    Object[] row = new Object[4];
+    Object[] row = new Object[6];
     tabelaListarProdutos.setModel(modelListarProdutos);
 
-    Object[] column = {"Codigo de Barras", "Preço", "Nome", "Descrição"};
+    Object[] column = {"Codigo de Barras", "Nome", "Preço", "Descrição", "Data de criação", "Disponibilidade"};
     modelListarProdutos.setColumnIdentifiers(column);
 
     for(int i = 0 ; i < produto.idLista.size(); i++){
         row[0] = produto.cod_barrasLista.get(i);
-        row[1] = produto.precoLista.get(i);
-        row[2] = produto.nomeLista.get(i);
+        row[1] = produto.nomeLista.get(i);
+        row[2] = produto.precoLista.get(i);
         row[3] = produto.descricaoLista.get(i);
+        row[4] = produto.dataCriacaoLista.get(i);
+        row[5] = produto.nomeStatusLista.get(i);
 
         modelListarProdutos.addRow(row);
         }

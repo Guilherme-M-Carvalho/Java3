@@ -3,31 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package conexao;
-import javax.swing.JOptionPane;
-import java.sql.SQLException;
+
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.SQLException;
+
 /**
  *
  * @author 55119
  */
-public class Empresa {
+public class AddCompra {
     private Conexao conexao;
+    private Integer idPessoa;
+    private String idProdutos;
     
-    public Empresa(){
+    public AddCompra(Integer idPessoa, String idProdutos){
         this.conexao = new Conexao();
+        this.idPessoa = idPessoa;
+        this.idProdutos = idProdutos;
     }
     
     public void inserir(){
-        String sql = "insert into empresa (cnpj, nome_fantasia, razao_social, situacao) values (?,?,?,?)";
+        String sql = "insert into compra (idPessoa , idProdutos) values (?,?)";
         
         try{
             if(this.conexao.conectar()){
                 PreparedStatement sentenca = this.conexao.getConnection().prepareStatement(sql);
-                sentenca.setInt(1, 2123432);
-                sentenca.setString(2, "EMPRESA TESTE");
-                sentenca.setString(3, "RAZAO TESTE");
-                sentenca.setString(4, "Ativo");
+                sentenca.setInt(1, idPessoa);
+                sentenca.setString(2, idProdutos);
                 sentenca.execute();
                 sentenca.close();
                 

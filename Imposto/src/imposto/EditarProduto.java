@@ -18,6 +18,8 @@ public class EditarProduto extends javax.swing.JFrame {
      */
     
     public Integer idEditarProduto;
+    public Integer qtdIniProduto;
+    public String dataIniProduto;
     
     private Produto produto;
     private DefaultTableModel modelListarProdutos;
@@ -28,26 +30,31 @@ public class EditarProduto extends javax.swing.JFrame {
         initComponents();
         modelListarProdutos = new DefaultTableModel();
         produto = new Produto();
-        produto.getProdutos();
+        produto.getProdutosUpdate();
         listarProdutos();
         
     }
 
     
     public void listarProdutos(){
-        Object[] row = new Object[4];
+        Object[] row = new Object[7];
         tabelaListagemProduto.setModel(modelListarProdutos);
         
-        Object[] column = {"Codigo de Barras", "Preço", "Nome", "Descrição"};
+        Object[] column = {"Codigo de Barras", "Preço", "Nome", "Descrição", "Data de criação", "Disponibilidade", "Quantidade"};
         modelListarProdutos.setColumnIdentifiers(column);
               
         for(int i = 0 ; i < produto.idLista.size(); i++){
-            row[0] = produto.cod_barrasLista.get(i);
-            row[1] = produto.precoLista.get(i);
-            row[2] = produto.nomeLista.get(i);
-            row[3] = produto.descricaoLista.get(i);
-            
-            modelListarProdutos.addRow(row);
+            if (produto.idStatusLista.get(i) == 1){
+                row[0] = produto.cod_barrasLista.get(i);
+                row[1] = produto.precoLista.get(i);
+                row[2] = produto.nomeLista.get(i);
+                row[3] = produto.descricaoLista.get(i);
+                row[4] = produto.dataCriacaoLista.get(i);
+                row[5] = produto.nomeStatusLista.get(i);
+                row[6] = produto.qtdLista.get(i);
+
+                modelListarProdutos.addRow(row);
+            }
         }
         
     }
@@ -73,6 +80,8 @@ public class EditarProduto extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        qtd = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
 
         tabelaListagemProduto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -116,6 +125,8 @@ public class EditarProduto extends javax.swing.JFrame {
 
         jLabel4.setText("Descrição");
 
+        jLabel5.setText("Quantidade");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -126,39 +137,49 @@ public class EditarProduto extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(name, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(price, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(codBarras, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(edit)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(save)))
-                        .addGap(59, 59, 59))
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
+                            .addComponent(jLabel5)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3)
                             .addComponent(jLabel4))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(price, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(qtd, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2)
+                            .addComponent(name)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(edit)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(save))
+                            .addComponent(codBarras))
+                        .addGap(59, 59, 59))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
                         .addComponent(jLabel1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(codBarras, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel2)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel5)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(qtd, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -190,20 +211,43 @@ public class EditarProduto extends javax.swing.JFrame {
                description.setText(produto.descricaoLista.get(resultado));
                price.setText(produto.precoLista.get(resultado).toString());
                codBarras.setText(produto.cod_barrasLista.get(resultado).toString());
-               idEditarProduto = produto.idLista.get(resultado);
+               qtd.setText(produto.qtdLista.get(resultado).toString());
+               idEditarProduto = produto.cod_barrasLista.get(resultado);
+               qtdIniProduto = produto.qtdLista.get(resultado);
+               dataIniProduto = produto.dataCriacaoLista.get(resultado);
                                                    
         }
             
     }//GEN-LAST:event_editActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
-        EditProduto updateProduto = new EditProduto(idEditarProduto, Integer.parseInt(price.getText()) , name.getText(), description.getText());
-       
-        if ( updateProduto.update() ) {
-            JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Sucesso!", 1);
-        } else {
-            JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Erro!", 1);
+        
+        if(qtdIniProduto == Integer.parseInt(qtd.getText())){
+            
+            EditProduto updateProduto = new EditProduto(idEditarProduto, Integer.parseInt(price.getText()) , name.getText(), description.getText(), dataIniProduto, 1);
+            for(int i = 0; i < qtdIniProduto; i++){
+                
+                if ( updateProduto.update() ) {
+                    JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Sucesso!", 1);
+                } else {
+                    JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Erro!", 1);
+                }
+            }
+        } else if(qtdIniProduto > Integer.parseInt(qtd.getText())){
+            
+            EditProduto updateProduto = new EditProduto(idEditarProduto, Integer.parseInt(price.getText()) , name.getText(), description.getText(), dataIniProduto, 2);
+            Integer diferenca = Integer.parseInt(qtd.getText()) - qtdIniProduto;
+            System.out.println(diferenca);
+            for(int i = 0; i < diferenca ; i++){
+                
+                if ( updateProduto.update() ) {
+                    JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Sucesso!", 1);
+                } else {
+                    JOptionPane.showMessageDialog(this, updateProduto.mensagem, "Erro!", 1);
+                }
+            }
         }
+       
     }//GEN-LAST:event_saveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -214,10 +258,12 @@ public class EditarProduto extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField name;
     private javax.swing.JTextField price;
+    private javax.swing.JTextField qtd;
     private javax.swing.JButton save;
     private javax.swing.JTable tabelaListagemProduto;
     // End of variables declaration//GEN-END:variables

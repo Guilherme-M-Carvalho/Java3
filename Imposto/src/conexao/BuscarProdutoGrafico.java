@@ -4,7 +4,6 @@
  */
 package conexao;
 
-import backEnd.Pessoa;
 import backEnd.Produto;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,19 +14,19 @@ import java.util.ArrayList;
  *
  * @author 55119
  */
-public class BuscaProduto{
+public class BuscarProdutoGrafico {
     private Conexao conexao;
     private ArrayList<Produto> listaProduto;
     private Produto produto;
    
-    public BuscaProduto(){
+    public BuscarProdutoGrafico(){
         this.conexao = new Conexao();
         this.listaProduto = new ArrayList<>();
     }
     
-    public ArrayList<Produto> buscar(){
+    public ArrayList<Produto> buscarP(){
 
-        String sql = "select * from vw_produtos";
+        String sql = "select distinct cod_barras, id, preco, nome, descricao, data_criacao, idStatusProduto, nomeStatusProduto, count(cod_barras) from vw_produtos group by cod_barras";
         
         try{
             if(this.conexao.conectar()){
@@ -40,10 +39,10 @@ public class BuscaProduto{
                     produto.setPreco(resultado.getInt("preco"));
                     produto.setNome(resultado.getString("nome"));
                     produto.setDescricao(resultado.getString("descricao"));
-                    produto.setImg(resultado.getString("img"));
-                    produto.setId_pessoa(resultado.getInt("id_pessoa"));
                     produto.setData_criacao(resultado.getString("data_criacao"));
+                    produto.setIdStatusProduto(resultado.getInt("idStatusProduto"));
                     produto.setNomeStatusProduto(resultado.getString("nomeStatusProduto"));
+                    produto.setQtd(resultado.getInt("count(cod_barras)"));
                     listaProduto.add(produto);
                 }
                 sentenca.close();
